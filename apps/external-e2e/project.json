@@ -1,0 +1,29 @@
+{
+  "name": "external-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/external-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/external-e2e/cypress.config.ts",
+        "devServerTarget": "external:serve",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "external:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/external-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": ["e2e"],
+  "implicitDependencies": ["external"]
+}

@@ -4,13 +4,12 @@
   </div>
 
 
-  <div class="alert alert-warning" *ngIf="showWarning" style="margin:20px;">
-
+  <div class="alert alert-warning" *ngIf="showWarning" style="margin: 20px">
     <p>
       You haven't saved your modifications. Do you really want to leave me?
     </p>
-    <button class="btn btn-primary" (click)="decide(true)">Yes</button>
-    <button class="btn btn-primary" (click)="decide(false)">No</button>
+    <button class="btn btn-primary">Yes</button>
+    <button class="btn btn-primary">No</button>
   </div>
 
   <div class="content">

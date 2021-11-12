@@ -1,12 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "ignorePatterns": ["coverage/*", "dist/*", "node_modules/*", "tools/*"],
+  "plugins": ["@angular-eslint", "@nx", "@typescript-eslint", "prettier"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "extends": ["eslint:recommended", "plugin:prettier/recommended"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -22,10 +23,7 @@
               },
               {
                 "sourceTag": "domain:dashboard",
-                "onlyDependOnLibsWithTags": [
-                  "domain:dashboard",
-                  "domain:shared"
-                ]
+                "onlyDependOnLibsWithTags": ["domain:dashboard", "domain:shared"]
               },
               {
                 "sourceTag": "domain:external",
@@ -33,10 +31,7 @@
               },
               {
                 "sourceTag": "domain:passenger",
-                "onlyDependOnLibsWithTags": [
-                  "domain:passenger",
-                  "domain:shared"
-                ]
+                "onlyDependOnLibsWithTags": ["domain:passenger", "domain:shared"]
               }
             ]
           }
@@ -44,13 +39,52 @@
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
+      "files": ["*.ts"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": ["", "app"],
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/no-empty-lifecycle-method": "warn",
+        "@angular-eslint/prefer-on-push-component-change-detection": "off",
+        "@typescript-eslint/naming-convention": [
+          "warn",
+          {
+            "selector": "variable",
+            "format": ["camelCase", "UPPER_CASE", "PascalCase"]
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "warn",
+        "@typescript-eslint/no-empty-interface": "error",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unused-vars": "off",
+        "no-console": "off",
+        "no-restricted-syntax": "off",
+        "valid-typeof": "error"
+      }
     },
     {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     }
   ]

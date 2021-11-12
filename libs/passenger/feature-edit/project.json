@@ -1,0 +1,40 @@
+{
+  "name": "passenger-feature-edit",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/passenger/feature-edit/src",
+  "prefix": "passenger",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "options": {
+        "project": "libs/passenger/feature-edit/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/passenger/feature-edit/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/passenger/feature-edit/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/passenger/feature-edit"],
+      "options": {
+        "jestConfig": "libs/passenger/feature-edit/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/passenger/feature-edit/src/**/*.ts", "libs/passenger/feature-edit/src/**/*.html"]
+      }
+    }
+  },
+  "tags": ["domain:passenger", "type:feature"]
+}

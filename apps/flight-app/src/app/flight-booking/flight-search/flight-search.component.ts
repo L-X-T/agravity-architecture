@@ -1,22 +1,17 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import {Component, OnInit} from '@angular/core';
-import {FlightService} from '@flight-workspace/flight-lib';
+import { Component } from '@angular/core';
+import { Flight, FlightService } from '@flight-workspace/flight-lib';
 
 @Component({
   selector: 'flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css']
 })
-export class FlightSearchComponent implements OnInit {
-
+export class FlightSearchComponent {
   from = 'Hamburg'; // in Germany
   to = 'Graz'; // in Austria
   urgent = false;
-
-  get flights() {
-    return this.flightService.flights;
-  }
 
   // "shopping basket" with selected flights
   basket: { [id: number]: boolean } = {
@@ -24,22 +19,21 @@ export class FlightSearchComponent implements OnInit {
     5: true
   };
 
-  constructor(
-    private flightService: FlightService) {
-  }
+  constructor(private flightService: FlightService) {}
 
-  ngOnInit() {
+  get flights(): Flight[] {
+    return this.flightService.flights;
   }
 
   search(): void {
-    if (!this.from || !this.to) return;
+    if (!this.from || !this.to) {
+      return;
+    }
 
-    this.flightService
-      .load(this.from, this.to, this.urgent);
+    this.flightService.load(this.from, this.to, this.urgent);
   }
 
   delay(): void {
     this.flightService.delay();
   }
-
 }

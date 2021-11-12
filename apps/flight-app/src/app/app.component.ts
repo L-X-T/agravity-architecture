@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'flight-app',
@@ -6,4 +8,9 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor() {
+    if (!environment.production) {
+      console.warn('hello from your console');
+    }
+  }
 }

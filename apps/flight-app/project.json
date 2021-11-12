@@ -1,0 +1,105 @@
+{
+  "name": "flight-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {
+    "@nx/angular:component": {
+      "style": "css",
+      "changeDetection": "OnPush"
+    },
+    "@schematics/angular:component": {
+      "style": "css",
+      "changeDetection": "OnPush"
+    }
+  },
+  "sourceRoot": "apps/flight-app/src",
+  "prefix": "flight",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/flight-app",
+        "index": "apps/flight-app/src/index.html",
+        "main": "apps/flight-app/src/main.ts",
+        "polyfills": "apps/flight-app/src/polyfills.ts",
+        "tsConfig": "apps/flight-app/tsconfig.app.json",
+        "assets": ["apps/flight-app/src/favicon.ico", "apps/flight-app/src/assets"],
+        "styles": [
+          "apps/flight-app/src/styles.css",
+          "apps/flight-app/src/assets/css/bootstrap.min.css",
+          "apps/flight-app/src/assets/css/paper-dashboard.css",
+          "apps/flight-app/src/assets/css/demo.css",
+          "apps/flight-app/src/assets/css/themify-icons.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "1mb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/flight-app/src/environments/environment.ts",
+              "with": "apps/flight-app/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "flight-app:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "flight-app:build:production"
+        },
+        "development": {
+          "browserTarget": "flight-app:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "flight-app:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/flight-app/src/**/*.ts", "apps/flight-app/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/flight-app"],
+      "options": {
+        "jestConfig": "apps/flight-app/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["domain:flights", "type:app"]
+}

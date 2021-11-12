@@ -1,0 +1,99 @@
+{
+  "name": "dashboard",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {
+    "@nx/angular:component": {
+      "style": "css",
+      "changeDetection": "OnPush"
+    },
+    "@schematics/angular:component": {
+      "style": "css",
+      "changeDetection": "OnPush"
+    }
+  },
+  "sourceRoot": "apps/dashboard/src",
+  "prefix": "dashboard",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/dashboard",
+        "index": "apps/dashboard/src/index.html",
+        "main": "apps/dashboard/src/main.ts",
+        "polyfills": "apps/dashboard/src/polyfills.ts",
+        "tsConfig": "apps/dashboard/tsconfig.app.json",
+        "assets": ["apps/dashboard/src/favicon.ico", "apps/dashboard/src/assets"],
+        "styles": ["apps/dashboard/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "1mb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/dashboard/src/environments/environment.ts",
+              "with": "apps/dashboard/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "dashboard:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "dashboard:build:production"
+        },
+        "development": {
+          "browserTarget": "dashboard:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "dashboard:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/dashboard/src/**/*.ts", "apps/dashboard/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/dashboard"],
+      "options": {
+        "jestConfig": "apps/dashboard/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["domain:dashboard", "type:app"]
+}

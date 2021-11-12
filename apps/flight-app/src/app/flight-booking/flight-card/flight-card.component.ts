@@ -1,54 +1,38 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  NgZone,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  SimpleChanges
-} from '@angular/core';
-import {Flight} from '@flight-workspace/flight-lib';
+import { Component, ElementRef, EventEmitter, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Flight } from '@flight-workspace/flight-lib';
 
 @Component({
   selector: 'flight-card',
-  templateUrl: './flight-card.component.html',
+  templateUrl: './flight-card.component.html'
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
-
-  @Input() item: Flight;
-  @Input() selected: boolean;
+  @Input() item: Flight | undefined;
+  @Input() selected = false;
   @Output() selectedChange = new EventEmitter<boolean>();
 
-  constructor(private element: ElementRef, private zone: NgZone) {
-  }
+  constructor(private element: ElementRef, private zone: NgZone) {}
 
-  ngOnInit() {
-  }
+  ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
 
-  select() {
+  select(): void {
     this.selected = true;
     this.selectedChange.next(true);
   }
 
-  deselect() {
+  deselect(): void {
     this.selected = false;
     this.selectedChange.next(false);
   }
 
-  blink() {
+  blink(): void {
     // Dirty Hack used to visualize the change detector
     // let originalColor = this.element.nativeElement.firstChild.style.backgroundColor;
     this.element.nativeElement.firstChild.style.backgroundColor = 'crimson';
@@ -59,9 +43,5 @@ export class FlightCardComponent implements OnInit, OnChanges, OnDestroy {
         this.element.nativeElement.firstChild.style.backgroundColor = 'white';
       }, 1000);
     });
-
-    return null;
   }
-
-
 }
