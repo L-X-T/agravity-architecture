@@ -19,17 +19,13 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/dashboard-lib/src/**/*.ts", "libs/dashboard-lib/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/dashboard-lib"],
       "options": {
-        "jestConfig": "libs/dashboard-lib/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/dashboard-lib/jest.config.ts"
       }
     }
   },

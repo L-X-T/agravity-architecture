@@ -25,15 +25,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/passenger/feature-edit"],
       "options": {
-        "jestConfig": "libs/passenger/feature-edit/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/passenger/feature-edit/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/passenger/feature-edit/src/**/*.ts", "libs/passenger/feature-edit/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["domain:passenger", "type:feature"]

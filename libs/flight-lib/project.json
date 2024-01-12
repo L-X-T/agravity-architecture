@@ -19,17 +19,13 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/flight-lib/src/**/*.ts", "libs/flight-lib/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/flight-lib"],
       "options": {
-        "jestConfig": "libs/flight-lib/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/flight-lib/jest.config.ts"
       }
     }
   },

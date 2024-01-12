@@ -62,14 +62,14 @@
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "browserTarget": "dashboard:build"
+        "buildTarget": "dashboard:build"
       },
       "configurations": {
         "production": {
-          "browserTarget": "dashboard:build:production"
+          "buildTarget": "dashboard:build:production"
         },
         "development": {
-          "browserTarget": "dashboard:build:development"
+          "buildTarget": "dashboard:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -77,21 +77,17 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "dashboard:build"
+        "buildTarget": "dashboard:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["apps/dashboard/src/**/*.ts", "apps/dashboard/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/dashboard"],
       "options": {
-        "jestConfig": "apps/dashboard/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/dashboard/jest.config.ts"
       }
     }
   },

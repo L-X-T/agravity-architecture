@@ -25,15 +25,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/passenger/domain"],
       "options": {
-        "jestConfig": "libs/passenger/domain/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/passenger/domain/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/passenger/domain/src/**/*.ts", "libs/passenger/domain/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["domain:passenger", "type:domain-logic"]

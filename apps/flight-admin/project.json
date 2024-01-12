@@ -62,14 +62,14 @@
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "browserTarget": "flight-admin:build"
+        "buildTarget": "flight-admin:build"
       },
       "configurations": {
         "production": {
-          "browserTarget": "flight-admin:build:production"
+          "buildTarget": "flight-admin:build:production"
         },
         "development": {
-          "browserTarget": "flight-admin:build:development"
+          "buildTarget": "flight-admin:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -77,21 +77,17 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "flight-admin:build"
+        "buildTarget": "flight-admin:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["apps/flight-admin/src/**/*.ts", "apps/flight-admin/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/flight-admin"],
       "options": {
-        "jestConfig": "apps/flight-admin/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/flight-admin/jest.config.ts"
       }
     }
   },

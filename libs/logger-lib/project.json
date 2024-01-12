@@ -19,17 +19,13 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/logger-lib/src/**/*.ts", "libs/logger-lib/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/logger-lib"],
       "options": {
-        "jestConfig": "libs/logger-lib/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/logger-lib/jest.config.ts"
       }
     }
   },
